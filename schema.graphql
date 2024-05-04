@@ -1,0 +1,33 @@
+type Query {
+  ping: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  slugName: String!
+  email: String!
+  image: String
+  bio: String
+  updatedAt: String
+  createdAt: String
+}
+
+type Pagination {
+  totalRecords: Int!
+  currentLimit: Int!
+  currentPage: Int!
+  hasNextPage: Boolean!
+}
+
+enum ToastTypes {
+  success
+  info
+  warning
+  error
+}
+
+type Toast {
+  text: String!
+  type: ToastTypes!
+}

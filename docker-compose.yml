@@ -1,0 +1,42 @@
+version: "3.1"
+services:
+  tracker_db:
+    image: postgres
+    container_name: tracker_db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: tracker
+    volumes:
+      - tracker_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  tracker_adminer:
+    image: adminer
+    container_name: tracker_adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  tracker_redis:
+    image: redislabs/redismod
+    container_name: tracker_redis
+    restart: always
+    ports:
+      - 6380:6379
+    volumes:
+      - redis_db:/db
+
+  tracker_redisinsight:
+    image: oblakstudio/redisinsight
+    container_name: tracker_redisinsight
+    restart: always
+    ports:
+      - "8006:5540"
+    volumes:
+      - redis_db:/db
+
+volumes:
+  tracker_data:
+  redis_db:
