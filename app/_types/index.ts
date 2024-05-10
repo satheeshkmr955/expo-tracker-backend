@@ -27,6 +27,10 @@ export interface Toast {
   type?: ToastTypes;
 }
 
+export interface TriggerToastProps {
+  toast?: Toast | undefined;
+}
+
 export interface Errors {
   name?: string[];
   email?: string[];
