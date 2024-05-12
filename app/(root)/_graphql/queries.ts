@@ -26,3 +26,20 @@ export const PaginationDetails = graphql(/* GraphQL */ `
     hasNextPage
   }
 `);
+
+export const GetSelfByName = graphql(/* GraphQL */ `
+  query GetSelfByName($input: GetSelfByNameInput!) {
+    getSelfByName(input: $input) {
+      ...UserDetails
+      bio
+    }
+  }
+`);
+
+export const GetUserByName = graphql(/* GraphQL */ `
+  query GetUserByName($input: GetUserByNameInput!) {
+    getUserByName(input: $input) {
+      ...UserDetails
+    }
+  }
+`);

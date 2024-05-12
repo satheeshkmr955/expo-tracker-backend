@@ -46,13 +46,14 @@ const SignUp = () => {
   const EyeIconClassName =
     "w-[20px] absolute top-[10px] right-[10px] text-gray-400 cursor-pointer hover:text-gray-600";
 
-    useEffect(() => {
-      if (status !== "loading") {
-        if (session !== null) {
-          redirect(HOME);
-        }
+  useEffect(() => {
+    if (status !== "loading") {
+      if (session !== null) {
+        window?.ReactNativeWebView?.postMessage?.(JSON.stringify(session));
+        redirect(HOME);
       }
-    }, [session, status]);
+    }
+  }, [session, status]);
 
   // 1. Define your form.
   const form = useForm<SignUpSchemaType>({

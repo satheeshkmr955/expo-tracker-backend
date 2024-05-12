@@ -1,5 +1,7 @@
 type Query {
   ping: String
+  getUserByName(input: GetUserByNameInput!): User
+  getSelfByName(input: GetSelfByNameInput!): User
 }
 
 type User {
@@ -30,4 +32,12 @@ enum ToastTypes {
 type Toast {
   text: String!
   type: ToastTypes!
+}
+
+input GetUserByNameInput {
+  name: String!
+}
+
+input GetSelfByNameInput {
+  name: String!
 }

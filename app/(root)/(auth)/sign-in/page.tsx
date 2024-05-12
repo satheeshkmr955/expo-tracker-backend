@@ -43,6 +43,7 @@ const SignIn = () => {
   useEffect(() => {
     if (status !== "loading") {
       if (session !== null) {
+        window?.ReactNativeWebView?.postMessage?.(JSON.stringify(session));
         redirect(HOME);
       }
     }
