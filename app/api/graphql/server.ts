@@ -7,6 +7,7 @@ import { parse, UrlWithParsedQuery } from "url";
 import next from "next";
 import { join } from "path";
 import { createSchema, createYoga } from "graphql-yoga";
+import { applyMiddleware } from "graphql-middleware";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 // import DataLoader from "dataloader";
@@ -22,6 +23,7 @@ import type { PrismaClient, User } from "@prisma/client";
 import { db } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { logger } from "@/lib/logger";
+import { permissions } from "@/lib/permission";
 
 import { RootResolvers } from "./_resolvers";
 
@@ -90,7 +92,7 @@ const yoga = createYoga({
   graphiql: {
     subscriptionsProtocol: "WS",
   },
-  schema,
+  schema: applyMiddleware(schema, permissions),
   logging: {
     debug(...args) {
       logger.debug(args);

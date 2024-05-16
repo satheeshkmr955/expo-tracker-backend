@@ -2,6 +2,45 @@ type Query {
   ping: String
   getUserByName(input: GetUserByNameInput!): User
   getSelfByName(input: GetSelfByNameInput!): User
+  getTracks(input: GetTracksInput!): Tracks!
+}
+
+type Mutation {
+  createTrack(input: CreateTrackInput!): Track!
+}
+
+type Tracks {
+  items: [Track!]!
+  pagination: Pagination!
+}
+
+type Track {
+  id: String
+  name: String!
+  userId: String!
+  user: User
+
+  locations: [Point!]!
+
+  createdAt: String
+  updatedAt: String
+}
+
+type Point {
+  id: String
+  timestamp: Int!
+  trackId: String!
+  track: Track
+
+  latitude: Int!
+  longitude: Int!
+  altitude: Int!
+  accuracy: Int!
+  heading: Int!
+  speed: Int!
+
+  createdAt: String
+  updatedAt: String
 }
 
 type User {
@@ -40,4 +79,25 @@ input GetUserByNameInput {
 
 input GetSelfByNameInput {
   name: String!
+}
+
+input GetTracksInput {
+  limit: Int
+  page: Int
+}
+
+input PointInput {
+  timestamp: Int!
+
+  latitude: Int!
+  longitude: Int!
+  altitude: Int!
+  accuracy: Int!
+  heading: Int!
+  speed: Int!
+}
+
+input CreateTrackInput {
+  name: String!
+  locations: [PointInput!]!
 }

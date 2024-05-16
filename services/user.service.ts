@@ -17,10 +17,6 @@ export const getUserByName = async (inputObj: GetUserByNameProps) => {
 export const getSelfByName = async (inputObj: GetSelfByNameProps) => {
   const { input, user } = inputObj;
 
-  if (!user) {
-    throw NotAuthorized(NOT_AUTHORIZED);
-  }
-
   const { name } = input || {};
 
   const userByName = await getUserByName({ input: { name } });
@@ -29,7 +25,7 @@ export const getSelfByName = async (inputObj: GetSelfByNameProps) => {
     throw UserNotFound(USER_NOT_FOUND);
   }
 
-  if (user.name !== userByName.name) {
+  if (user!.name !== userByName.name) {
     throw NotAuthorized(NOT_AUTHORIZED);
   }
 

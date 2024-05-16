@@ -1,7 +1,12 @@
 import { toast } from "sonner";
 import type { GraphQLErrorExtensions } from "graphql/error";
 
-import { QueryGetSelfByNameArgs, QueryGetUserByNameArgs } from "@/gql/types";
+import {
+  QueryGetSelfByNameArgs,
+  QueryGetUserByNameArgs,
+  QueryGetTracksArgs,
+  MutationCreateTrackArgs,
+} from "@/gql/types";
 import { User } from "@prisma/client";
 
 declare global {
@@ -61,5 +66,13 @@ export interface CurrentUser {
 export interface GetUserByNameProps extends QueryGetUserByNameArgs {}
 
 export interface GetSelfByNameProps extends QueryGetSelfByNameArgs {
+  user: User | null;
+}
+
+export interface GetTracksProps extends QueryGetTracksArgs {
+  user: User | null;
+}
+
+export interface CreateTrackProps extends MutationCreateTrackArgs {
   user: User | null;
 }

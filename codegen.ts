@@ -11,6 +11,8 @@ const config: CodegenConfig = {
         mapperTypeSuffix: "Modal",
         mappers: {
           User: "@prisma/client#User",
+          Track: "@prisma/client#Track",
+          Point: "@prisma/client#Point",
         },
         contextType: "../app/api/graphql/route#GraphQLContext",
       },

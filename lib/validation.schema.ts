@@ -74,3 +74,18 @@ export const signUpApiSchema = z.object({
 export const checkEmailsExistsSchema = z.object({
   email: z.string().min(1, { message: EMAIL_REQUIRED }).email(EMAIL_NOT_VALID),
 });
+
+export const LocationSchema = z.object({
+  timestamp: z.number(),
+  latitude: z.number(),
+  longitude: z.number(),
+  altitude: z.number(),
+  accuracy: z.number(),
+  heading: z.number(),
+  speed: z.number(),
+});
+
+export const CreateTrackInputSchema = z.object({
+  name: z.string(),
+  locations: z.array(LocationSchema),
+});

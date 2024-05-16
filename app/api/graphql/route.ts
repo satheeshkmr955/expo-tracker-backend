@@ -2,6 +2,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { createSchema, createYoga } from "graphql-yoga";
+import { applyMiddleware } from "graphql-middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 // import DataLoader from "dataloader";
@@ -15,6 +16,7 @@ import type { PrismaClient, User } from "@prisma/client";
 import { db } from "@/lib/db";
 import { redis } from "@/lib/redis";
 import { logger } from "@/lib/logger";
+import { permissions } from "@/lib/permission";
 
 import { RootResolvers } from "./_resolvers";
 
@@ -66,7 +68,7 @@ export const cache = createRedisCache({ redis });
 
 const { handleRequest } = createYoga({
   graphqlEndpoint,
-  schema,
+  schema: applyMiddleware(schema, permissions),
   logging: {
     debug(...args) {
       logger.debug(args);
