@@ -1,3 +1,4 @@
 - [x] graphql-shield and graphql-middleware
 - [x] get tracks
 - [x] create track
+- [ ] logout screen

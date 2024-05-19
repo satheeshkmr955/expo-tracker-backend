@@ -50,7 +50,7 @@ const SignUp = () => {
     if (status !== "loading") {
       if (session !== null) {
         window?.ReactNativeWebView?.postMessage?.(JSON.stringify(session));
-        redirect(HOME);
+        // redirect(HOME);
       }
     }
   }, [session, status]);
